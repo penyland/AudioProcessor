@@ -1,0 +1,44 @@
+<Project>
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0</VersionPrefix>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)settings/project.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <IsPackable>true</IsPackable>
+    <Authors>Peter Nylander</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <RootNamespace></RootNamespace>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>CODE_ANALYSIS</DefineConstants>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="!$(MSBuildProjectName.Contains('.Deployment'))">
+      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
+      <AdditionalFiles Include="$(MSBuildThisFileDirectory)settings/stylecop.json">
+        <Link>Properties\stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+
+</Project>
